@@ -2,8 +2,13 @@
 require_relative "class/game"
 
 # Lets first start this program by passing the region we want to start in.
-region = ARGV[0]
+region = ARGV.shift
 
+while (['Kanto'].include? region) == false do
+	puts "Seems you forgot to specify a region to start in please specify one" unless region
+	puts "We only have Kanto region(s) available..." unless region == ''
+	region = STDIN.gets.chomp().to_s
+end
 # Create new player object
 game = Game.new(region);
 
@@ -44,3 +49,10 @@ end
 trainer.gender = gender;
 
 prof.say("Im am very pleased to meet you #{ref}")
+
+File.write(game.db("player"), trainer.to_json)
+
+trainer = JSON.parse(FIle.read(game.db("player")));
+
+prof.say("See you later #{trainer.name}")
+
