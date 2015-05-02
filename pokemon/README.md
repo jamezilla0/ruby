@@ -7,4 +7,4 @@ A pokemon program that does the basic game functions of the hand held pokemon ga
 > After you resolve any dependencies run the program with native ruby command from the intro, after which on the same line  specify the region to start from.
 
 #Start game
-> account@server-pc:/home/user/programs# sudo ruby pokemon/intro.rb Kanto
+> account@server-pc:/home/user/programs# sudo ruby pokemon/start.rb Kanto
