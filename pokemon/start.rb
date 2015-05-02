@@ -1,18 +1,23 @@
 # A small pokemon program writen in ruby By: James Bernard
 require_relative "class/game"
 
+debug = ARGV.shift
+
+system('clear') unless debug == 'debug'
+
 # Lets first start this program by passing the region we want to start in.
 region = ARGV.shift
 
-while (['Kanto'].include? region) == false do
-	puts "Seems you forgot to specify a region to start in please specify one" unless region
-	puts "We only have Kanto region(s) available..." unless region == ''
+while ($available_regions.include? region) == false do
+	typeWords red("Seems you forgot to specify a region to start in please specify one") unless region
+	typeWords "We currently have #{green($available_regions)} region(s) available" unless region == ''
 	region = STDIN.gets.chomp().to_s
 end
 # Create new player object
 game = Game.new(region);
-
+# This games trainer derives from the games player class
 trainer = game.player
+# This games proffessor also derives from the games prof class
 prof = game.prof
 
 # Greet the player 
@@ -25,9 +30,9 @@ prof.say("Whats your name?")
 trainer.name = STDIN.gets.chomp().to_s
 
 # Response #1 for player
-prof.say("Nice to meet you #{trainer.name}")
+prof.say("Nice to meet you #{red(trainer.name)}!")
 # Question #2 for player
-prof.say("So #{trainer.name} are you a boy(b) or girl(g)?")
+prof.say("So #{red(trainer.name)} are you a boy(b) or girl(g)?")
 
 gender = STDIN.gets.chomp().to_s
 
@@ -37,22 +42,9 @@ while (["b", "g"].include? gender) == false do
 	gender = STDIN.gets.chomp().to_s
 end
 
-case gender
-when "b"
-	gender = "Male"
-	ref = "sir"
-when "g"
-	gender = "Female"
-	ref = "ma'am"
-end
+# Finally change the players gender to one of the choices
+trainer.set_gender(gender);
 
-trainer.gender = gender;
-
-prof.say("Im am very pleased to meet you #{ref}")
-
-File.write(game.db("player"), trainer.to_json)
-
-trainer = JSON.parse(FIle.read(game.db("player")));
-
-prof.say("See you later #{trainer.name}")
-
+prof.say("Im am very pleased to meet you #{trainer.sur}")
+# Go to the next part of the game
+game.nextDay();
