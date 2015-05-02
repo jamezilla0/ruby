@@ -1,4 +1,4 @@
-A pokemon program that does the basic game functions of the hand held pokemon game.
+A terminal based pokemon game that is both interactive and user friendly, I am building this to futher advance my understanding of ruby language so please bare with me and comment any errors you can see. If you are just learning as me feel free to fork this repo and use it as you please :) thank you!
 
 #Dependancies
 > Ruby (https://www.ruby-lang.org/en/downloads/)
